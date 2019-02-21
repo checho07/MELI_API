@@ -1,0 +1,21 @@
+{
+  "name": "api_vimeo",
+  "version": "1.0.0",
+  "description": "Esta es la API de vimeo para conectar con el perfil CUNBRE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergio Velandia",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "*",
+    "morgan": "*",
+    "nodemon": "*",
+    "vimeo": "*"
+  },
+  "engines": {
+    "node": "8.12.0"
+  }
+}
