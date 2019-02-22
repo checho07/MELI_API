@@ -10,15 +10,38 @@ let userModel = {};
             method:'GET',
             path: '/me/albums/5781646/videos',
             query:{
-                
-                fields:'uri,'
+                fields:'pictures'
             }
+           
+          
         },function(error, body, status_code, headers){
             if(error){
                 console.log('ERROR'+error)
             };
-            callback(null,body)
-            console.log(headers)
+            callback(null,body.data)
+            console.log(body)
+        }
+        )
+ }
+
+ userModel.getAlbums =(callback)=>{
+
+    client.request(
+        {
+            method:'GET',
+            path: '/me/albums',
+            query:{
+                fields:'name,metadata.connections.videos.uri'
+            },
+            headers:{"Access-Control-Allow-Origin":"*"}
+           
+          
+        },function(error, body, status_code, headers){
+            if(error){
+                console.log('ERROR'+error)
+            };
+            callback(null,body.data)
+            console.log(body)
         }
         )
  }
