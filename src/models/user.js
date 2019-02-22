@@ -3,15 +3,15 @@ let client = new Vimeo('f7d161d7174cd2d2a8c52f8ac278c6bc3f24b084','w/1ZvYS8JA+oD
 
 let userModel = {};
 
- userModel.getVideos =(callback)=>{
+ userModel.getVideos =(param,callback)=>{
 
     client.request(
         {
             method:'GET',
-            path: '/me/albums/5781646/videos',
-            query:{
-                fields:'pictures'
-            }
+            path: '/me'+param.id,
+            // query:{
+            //     fields:'pictures'
+            // }
            
           
         },function(error, body, status_code, headers){
