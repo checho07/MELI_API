@@ -4,8 +4,7 @@ module.exports = function (app){
 
     app.get('/videos',(req,res)=>{
         
-       const idAlbum = {id:req.body.id}
-       User.getVideos(idAlbum,(err,data)=>{
+        User.getVideos((err,data)=>{
            res.status(200).json(data);
            
        })
