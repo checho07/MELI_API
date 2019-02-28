@@ -5,6 +5,11 @@ let userModel = {};
 
 userModel.getVideos =(callback)=>{
 
+    res.header = 'Access-Control-Allow-Origin', '*'
+    res.header ='Access-Control-Allow-Credentials', true
+    res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+    res.header ='Access-Control-Allow-Headers', 'Content-Type'
+
     client.request(
         {
             method:'GET',
@@ -26,6 +31,11 @@ userModel.getVideos =(callback)=>{
  }
 
  userModel.getAlbums =(callback)=>{
+
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+        res.header ='Access-Control-Allow-Headers', 'Content-Type'
 
     client.request(
         {
