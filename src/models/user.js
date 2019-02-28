@@ -32,9 +32,9 @@ userModel.getVideos =(callback)=>{
 
  userModel.getAlbums =(callback)=>{
 
-        res.header = 'Access-Control-Allow-Origin', '*'
-        res.header ='Access-Control-Allow-Credentials', true
-        res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+        // res.header = 'Access-Control-Allow-Origin', '*'
+        // res.header ='Access-Control-Allow-Credentials', true
+        // res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
     
 
     client.request(
