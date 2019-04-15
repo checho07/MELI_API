@@ -10,7 +10,7 @@ userModel.getVideos =(callback)=>{
     client.request(
         {
             method:'GET',
-            path: '/me/projects/714605',
+            path: '/me/projects/714605/videos',
             query:{
                 fields:'uri,files,name,description,pictures.sizes'
             },
