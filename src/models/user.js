@@ -27,6 +27,31 @@ userModel.getVideos =(callback)=>{
         )
  }
 
+
+userModel.getAllVideosVimeo =(callback)=>{
+
+    
+
+    client.request(
+        {
+            method:'GET',
+            path: '/me/videos',
+            query:{
+                fields:'uri,files,name,description,pictures.sizes'
+            },
+            headers:{"Access-Control-Allow-Origin":"*"}
+           
+          
+        },function(error, body, status_code, headers){
+            if(error){
+                console.log('ERROR'+error)
+            };
+            callback(null,body.data)
+            console.log(body)
+        }
+        )
+ }
+
  userModel.getAlbums =(callback)=>{
 
 
