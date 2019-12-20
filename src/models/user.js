@@ -97,7 +97,7 @@ userModel.getVideos =(callback)=>{
  }
 
 
-userModel.getAllVideosVimeo =(data,callback)=>{
+userModel.getAllVideosVimeo =(callback)=>{
 
     
 
