@@ -65,14 +65,15 @@ module.exports = function (app){
         })
      })
      
-     app.post('/analitycs/incrementCounter',(req,res)=>{
-        res.header = 'Access-Control-Allow-Origin', '*'
-        res.header ='Access-Control-Allow-Credentials', true
-        res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+     app.get('/analitycs/incrementCounter',(req,res)=>{
         let params = {collectionName: req.query.collectionName, counterName: req.query.counterName }
         User.incrementCounter(params,(err,data)=>{
-
-            res.status(200).json("success")
+            if(data){
+                res.status(200).json(data)
+            } else{
+                res.status(500).json(err)
+            }           
+            
         })
      })
 }
