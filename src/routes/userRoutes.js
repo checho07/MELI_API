@@ -69,7 +69,7 @@ module.exports = function (app){
         let params = {collectionName: req.query.collectionName, counterName: req.query.counterName }
         User.incrementCounter(params,(err,data)=>{
             if(data){
-                res.status(200).json(data)
+                res.status(200).json("Succes")
             } else{
                 res.status(500).json(err)
             }           
