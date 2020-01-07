@@ -32,7 +32,7 @@ userModel.addVideoCounter = (params,callback)=>{
     var dbRef = db.collection("videosCounter").doc(params.uid).collection("videos").doc(params.videoId.toString())
 
     db.collection("videosCounter").doc(params.uid).collection("videos").doc(params.videoId.toString())
-    .create({ num_shards: 10,videoId: params.videoId, channelVideo: params.channelVideo }).then(()=>{     
+    .create({ num_shards: 10,videoId: params.videoId, channelVideo: params.channelVideo, videoName: params.videoName }).then(()=>{     
        
      
             batch.set(dbref1,{uid:params.uid, email: params.email })
