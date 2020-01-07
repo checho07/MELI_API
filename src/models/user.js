@@ -25,6 +25,52 @@ var cvivoMain;
 
   initializeApp();
 
+userModel.addVideoCounter = (params,callback)=>{
+    const db = admin.firestore();
+    var batch = db.batch();
+    var dbref1 = db.collection("videosCounter").doc(params.uid);
+    var dbRef = db.collection("videosCounter").doc(params.uid).collection("videos").doc(params.videoId.toString())
+
+    db.collection("videosCounter").doc(params.uid).collection("videos").doc(params.videoId.toString())
+    .create({ num_shards: 10,videoId: params.videoId, channelVideo: params.channelVideo }).then(()=>{     
+       
+     
+            batch.set(dbref1,{uid:params.uid, email: params.email })
+            for(let i = 0; i < 10; i++){
+                let shardRef = dbRef.collection("shards").doc(i.toString());
+                batch.set(shardRef,{count:0});
+            }
+            batch.commit().then(()=>{
+                callback(null,"created")
+            }) 
+        
+    }).catch(()=>{
+        const shard_id = Math.floor(Math.random() * 10).toString();  
+        const shard_ref = dbRef.collection('shards').doc(shard_id);
+        shard_ref.update("count", admin.firestore.FieldValue.increment(1));
+        callback(null,"incremented");
+    })
+  
+   
+}  
+
+userModel.getVideoCounter = (params,callback)=>{
+    const db = admin.firestore();
+    var dbRef = db.collection("videosCounter").doc(params.uid).collection("videos").doc(params.videoId.toString())
+    
+    // Sum the count of each shard in the subcollection
+    dbRef.collection('shards').get().then(snapshot => {
+        let total_count = 0;
+        snapshot.forEach(doc => {
+            total_count += doc.data().count;
+        });
+        callback(null, total_count)
+        
+    });
+
+}
+
+
 userModel.createCounter = (params,callback)=>{
     
     const db = admin.firestore();
@@ -39,10 +85,14 @@ userModel.createCounter = (params,callback)=>{
         batch.set(shardRef, { count: 0 });
     }
     batch.commit()
-    .then(()=>callback(null,'succes'))
+    .then(()=>{
+        // this.incrementCounter(params)
+        callback(null,'succes')})
    
     
 }  
+
+
 
 userModel.getCount= (params,callback)=> {
 

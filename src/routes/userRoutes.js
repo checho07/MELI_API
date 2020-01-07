@@ -41,7 +41,31 @@ module.exports = function (app){
         })
      });
 
-     app.get('/analitycs/createCounter',(req,res)=>{
+     
+     // Counters CVIVO Analitycs ////
+
+     app.post('/analitycs/videos',(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+       var _data = req.body;
+       User.addVideoCounter(_data,(err,data)=>{
+           res.status(200).json(data)
+       })
+    
+     })
+     app.get('/analitycs/videos',(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
+       var _data = {uid:req.query.uid, videoId: req.query.videoId};
+       User.getVideoCounter(_data,(err,data)=>{
+           res.status(200).json(data)
+       })
+    
+     })
+
+     app.get('/analitycs/channel/createCounter',(req,res)=>{
         res.header = 'Access-Control-Allow-Origin', '*'
         res.header ='Access-Control-Allow-Credentials', true
         res.header ='Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS'
@@ -52,9 +76,8 @@ module.exports = function (app){
         })
      })
 
-     // Counters CVIVO Analitycs ////
 
-     app.get('/analitycs/getCounter',(req,res)=>{
+     app.get('/analitycs/channel/getCounter',(req,res)=>{
         
         res.header = 'Access-Control-Allow-Origin', '*'
         res.header ='Access-Control-Allow-Credentials', true
@@ -65,7 +88,7 @@ module.exports = function (app){
         })
      })
      
-     app.get('/analitycs/incrementCounter',(req,res)=>{
+     app.get('/analitycs/channel/incrementCounter',(req,res)=>{
         let params = {collectionName: req.query.collectionName, counterName: req.query.counterName }
         User.incrementCounter(params,(err,data)=>{
             if(data){
@@ -76,4 +99,6 @@ module.exports = function (app){
             
         })
      })
+
+     
 }
