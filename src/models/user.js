@@ -25,6 +25,15 @@ var cvivoMain;
 
   initializeApp();
 
+userModel.updateCounter = (params,callback)=>{
+    const db = admin.firestore();
+    var dbref1 = db.collection("counters").doc(params.counter);
+    dbref1.update("count",admin.firestore.FieldValue.increment(1)).then(()=>{
+        callback(null,"counter updated");
+    });
+
+}  
+
 userModel.addVideoCounter = (params,callback)=>{
     const db = admin.firestore();
     var batch = db.batch();
