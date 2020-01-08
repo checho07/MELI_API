@@ -47,7 +47,7 @@ module.exports = function (app){
      app.patch('/analitycs/counters',(req,res)=>{
         res.header = 'Access-Control-Allow-Origin', '*'
         res.header ='Access-Control-Allow-Credentials', true
-        res.header ='Access-Control-Allow-Methods', 'POST'
+        res.header ='Access-Control-Allow-Methods', 'PATCH'
         var _counter = req.body;
         User.updateCounter(_counter,(err,data)=>{
             res.status(200).json(data)
