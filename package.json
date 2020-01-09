@@ -10,9 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "*",
+    "dotenv": "^8.2.0",
     "express": "*",
     "firebase-admin": "^8.8.0",
     "morgan": "*",
+    "nodemailer": "^6.4.2",
     "nodemon": "*",
     "vimeo": "*"
   },

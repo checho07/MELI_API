@@ -5,12 +5,39 @@ var cvivoAnalitycsKey = require("../../cvivoAnalitycsKey.json");
 var cvivoMainKey = require("../../cvivoMainKey.json");
 let userModel = {};
 var cvivoMain;
+const nodemailer = require("nodemailer");
+require('dotenv').config();
+
+
+
+let transporter = nodemailer.createTransport({
+    service:"Gmail",
+    auth:{
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASS
+    }
+})
+
+function sendMail(_userInfo){
+    let mailOptions  = transporter.sendMail({
+        from: "C-VIVO <cebiac@cun.edu.co>",
+        to: "sergio.velandia@cun.edu.co",
+        subject: "Cupon registrado",
+        text: 
+        `Cupon registrado: \n
+         Fecha de registro: ${_userInfo.registerTime} \n
+         Correo: ${_userInfo.email} \n
+         Nombre: ${_userInfo.name} \n
+         phone: ${_userInfo.phone}\n
+        ` 
+    })
+}
+
 
 
 
  
-
-  function initializeApp() {   
+ function initializeApp() {   
 
 
   
@@ -29,6 +56,9 @@ userModel.updateCounter = (params,callback)=>{
     const db = admin.firestore();
     var dbref1 = db.collection("counters").doc(params.counter);
     dbref1.update("count",admin.firestore.FieldValue.increment(1)).then(()=>{
+        if(params.counter == "cupones"){            
+            sendMail({...params})
+        }
         callback(null,"counter updated");
     });
 
