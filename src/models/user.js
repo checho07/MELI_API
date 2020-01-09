@@ -32,10 +32,6 @@ function sendMail(_userInfo){
         ` 
     })
 }
-
-
-
-
  
  function initializeApp() {   
 
@@ -52,12 +48,39 @@ function sendMail(_userInfo){
 
   initializeApp();
 
+  function videosViewResume(_videoId){
+    const db = admin.firestore();
+    let dbref = db.collection("videosViewResume").doc(_videoId);
+
+    dbref.get().then(doc =>{
+
+        if(doc.exists)
+        {
+            const shard_id = Math.floor(Math.random() * 10).toString();
+            const shard_ref = dbref.collection('shards').doc(shard_id);
+            shard_ref.update("count", admin.firestore.FieldValue.increment(1));
+        }else
+        {
+                   
+
+        }
+    })
+  }
+
+
+  
+
+  //------ End functions ------//
+
+
+  /// UserModel Methods
+
 userModel.updateCounter = (params,callback)=>{
     const db = admin.firestore();
     var dbref1 = db.collection("counters").doc(params.counter);
     dbref1.update("count",admin.firestore.FieldValue.increment(1)).then(()=>{
         if(params.counter == "cupones"){            
-            sendMail({...params})
+            sendMail(params)
         }
         callback(null,"counter updated");
     });
