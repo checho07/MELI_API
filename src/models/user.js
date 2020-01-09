@@ -21,11 +21,11 @@ let transporter = nodemailer.createTransport({
 function sendMail(_userInfo){
     let mailOptions  = transporter.sendMail({
         from: "C-VIVO <cebiac@cun.edu.co>",
-        to: "sergio.velandia@cun.edu.co",
+        to: ["oscar_moreno@cun.edu.co","sergio_velandia@cun.edu.co"],
         subject: "Cupon registrado",
         text: 
         `Cupon registrado: \n
-         Fecha de registro: ${_userInfo.registerTime} \n
+         Fecha de registro: ${new Date(_userInfo.registerTime)} \n
          Correo: ${_userInfo.email} \n
          Nombre: ${_userInfo.name} \n
          phone: ${_userInfo.phone}\n
