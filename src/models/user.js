@@ -22,7 +22,7 @@ function sendMail(_userInfo){
     console.log("log1: " +_userInfo)
     let mailOptions  = transporter.sendMail({
         from: "C-VIVO <cebiac@cun.edu.co>",
-        to: ["sergio_velandia@cun.edu.co"],
+        to: ["oscar_moreno@cun.edu.co","sergio_velandia@cun.edu.co"],
         subject: "Cupon registrado",
         text: 
         `Cupon registrado: \n
