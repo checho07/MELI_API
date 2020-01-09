@@ -44,6 +44,15 @@ module.exports = function (app){
      
      // Counters CVIVO Analitycs ////
 
+     app.get("/analitycs/counters",(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'
+        User.getAllCounter((err,data)=>{
+            res.status(200).json(data);
+        })
+     })
+
      app.patch('/analitycs/counters',(req,res)=>{
         res.header = 'Access-Control-Allow-Origin', '*'
         res.header ='Access-Control-Allow-Credentials', true

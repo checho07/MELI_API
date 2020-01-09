@@ -34,6 +34,17 @@ userModel.updateCounter = (params,callback)=>{
 
 }  
 
+userModel.getAllCounter = (callback)=>{
+    const db = admin.firestore();
+    var dbref = db.collection("counters").get().then(snapshot=>{  
+        let _data = []
+        snapshot.forEach(doc=>{          
+            _data.push({id:doc.id,data:{...doc.data()}}); 
+        })
+        callback(null,_data);
+    })
+} 
+
 userModel.addVideoCounter = (params,callback)=>{
     const db = admin.firestore();
     var batch = db.batch();
@@ -156,15 +167,15 @@ userModel.getVideos =(callback)=>{
  }
 
 
-userModel.getAllVideosVimeo =(callback)=>{
-
-    
+userModel.getAllVideosVimeo =(callback)=>{    
 
     client.request(
         {
             method:'GET',
-            path: '/me/videos',
+            path: '/me/projects/1073180/videos',
             query:{
+                page:1,
+                per_page:100,
                 fields:'uri,files,name,description,pictures.sizes'
             },
             headers:{"Access-Control-Allow-Origin":"*"}
