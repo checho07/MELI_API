@@ -26,7 +26,7 @@ function sendMail(_userInfo){
         subject: "Cupon registrado",
         text: 
         `Cupon registrado: \n
-         Fecha de registro: ${new Date(_userInfo.registerTime)} \n
+         Fecha de registro: ${new Date(_userInfo.registerTime).toLocaleString()} \n
          Correo: ${_userInfo.email} \n
          Nombre: ${_userInfo.name} \n
          phone: ${_userInfo.phone}\n
