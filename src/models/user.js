@@ -289,14 +289,23 @@ userModel.getAllVideosVimeo =(callback)=>{
  }
 
  /////////////////  CVIVO ADMIN ////////////
- userModel.test = (callback)=>{
+ userModel.getActiveSchedule = (callback)=>{
     const db = cvivoAdmin.firestore();
-    // admin.firestore().collection('').orderBy('date',"asc")
+    //  db.collection('parrilla').orderBy('date',"asc").onSnapshot(doc=>{
+    //     let docsAray = []
+    //     doc.docs.forEach(element => {
+    //         docsAray.push(element.data())
+    //     });
+    //     callback(null,docsAray)
+    //  })
    db.collection('parrilla',ref => ref.or).orderBy('date',"asc").get().then(res=>{
-        console.log(res.docs[0].data())
+       
         let docsAray = []
         res.docs.forEach(element => {
-            docsAray.push(element.data())
+            if(element.data().active){
+                docsAray.push(element.data())
+            }
+          
         });
         callback(null,docsAray)
     
