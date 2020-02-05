@@ -119,5 +119,35 @@ module.exports = function (app){
         })
      })
 
+      //Fin  Counters CVIVO Analitycs ////
+
+//||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+
+     // Control horario ////
+
+     app.post('/horario/email',(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'   
+        User.sendWorkerEmail(req.body,(err,data)=>{
+            res.status(200).json(data)
+        })
+     })
+
+     //||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+        // CVIVO ADMIN ////
+
+     app.get('/admin',(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'  
+        User.test((err,data)=>{
+            res.status(200).json(data)
+        })
+     })
+
+
      
 }

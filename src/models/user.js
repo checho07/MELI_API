@@ -3,8 +3,10 @@ var admin = require('firebase-admin');
 let client = new Vimeo('f7d161d7174cd2d2a8c52f8ac278c6bc3f24b084','w/1ZvYS8JA+oD1GRvbDVx6H09Q/+3lXgl7x+lsK6y9gTNHTfStN1WqciMFcfFrDMJwvsv0W1PPMBOKhQqzUUv3Pe8DGsy+8bvzK/Qj97QAnU9rrjtVya6RH0WWLlhwEZ','bd5793a910a407ac9960e68a947d320a');
 var cvivoAnalitycsKey = require("../../cvivoAnalitycsKey.json");
 var cvivoMainKey = require("../../cvivoMainKey.json");
+var cvivoAdminKey = require("../../cvivo-admin-2020-Key.json")
 let userModel = {};
 var cvivoMain;
+var cvivoAdmin;
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 
@@ -18,8 +20,7 @@ let transporter = nodemailer.createTransport({
     }
 })
 
-function sendMail(_userInfo){
-    console.log("log1: " +_userInfo)
+function sendNewCouponMail(_userInfo){
     let mailOptions  = transporter.sendMail({
         from: "C-VIVO <cebiac@cun.edu.co>",
         to: ["oscar_moreno@cun.edu.co","sergio_velandia@cun.edu.co"],
@@ -33,23 +34,37 @@ function sendMail(_userInfo){
         ` 
     })
 }
+function sendWorkerNotificationMail(_workerInfo){
+     transporter.sendMail({
+        from: "Horario <cebiac@cun.edu.co>",
+        to: _workerInfo.email,
+        subject: "Registro de llegada",       
+        html: "<img src='https://bit.ly/2uV8MZj'>",
+        icalEvent :{
+            method :'publish',
+            content:'evento de prueba'
+        }
+    
+    },(err,response) =>{
+      console.log(response)
+    })
+
+
+}
  
- function initializeApp() {   
+ function initializeApp() {
 
-
-  
     admin.initializeApp({
         credential: admin.credential.cert(cvivoAnalitycsKey)
-    });   
-
-    cvivoMain = admin.initializeApp({credential: admin.credential.cert(cvivoMainKey)},'CvivoMain');
-
-    
+    }); 
+    cvivoMain = admin.initializeApp({credential: admin.credential.cert(cvivoMainKey)},'CvivoMain');    
+    cvivoAdmin = admin.initializeApp({credential: admin.credential.cert(cvivoAdminKey)},'CvivoAdmin');  
   }
 
   initializeApp();
 
   function videosViewResume(_videoId){
+    
     const db = admin.firestore();
     let dbref = db.collection("videosViewResume").doc(_videoId);
 
@@ -61,8 +76,7 @@ function sendMail(_userInfo){
             const shard_ref = dbref.collection('shards').doc(shard_id);
             shard_ref.update("count", admin.firestore.FieldValue.increment(1));
         }else
-        {
-                   
+        {                  
 
         }
     })
@@ -81,7 +95,7 @@ userModel.updateCounter = (params,callback)=>{
     var dbref1 = db.collection("counters").doc(params.counter);
     dbref1.update("count",admin.firestore.FieldValue.increment(1)).then(()=>{
         if(params.counter == "cupones"){            
-            sendMail(params)
+            sendNewCouponMail(params)
             console.log(params)
         }
         callback(null,"counter updated");
@@ -268,5 +282,22 @@ userModel.getAllVideosVimeo =(callback)=>{
         }
         )
  }
+
+ userModel.sendWorkerEmail = (params,callback)=>{
+    sendWorkerNotificationMail(params)
+    callback(null,'ok') 
+ }
+
+ /////////////////  CVIVO ADMIN ////////////
+ userModel.test = (callback)=>{
+    const db = cvivoAdmin.firestore();
+    // admin.firestore()
+   db.collection('parrilla').get().then(res=>{
+        console.log(res.docs[0].data())
+        callback(null,res.docs[0].data())
+    
+    })
+}
+   
 
  module.exports = userModel;
