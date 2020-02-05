@@ -291,8 +291,8 @@ userModel.getAllVideosVimeo =(callback)=>{
  /////////////////  CVIVO ADMIN ////////////
  userModel.test = (callback)=>{
     const db = cvivoAdmin.firestore();
-    // admin.firestore()
-   db.collection('parrilla').get().then(res=>{
+    // admin.firestore().collection('').orderBy('date',"asc")
+   db.collection('parrilla',ref => ref.or).orderBy('date',"asc").get().then(res=>{
         console.log(res.docs[0].data())
         callback(null,res.docs[0].data())
     
