@@ -294,7 +294,11 @@ userModel.getAllVideosVimeo =(callback)=>{
     // admin.firestore().collection('').orderBy('date',"asc")
    db.collection('parrilla',ref => ref.or).orderBy('date',"asc").get().then(res=>{
         console.log(res.docs[0].data())
-        callback(null,res.docs[0].data())
+        let docsAray = []
+        res.docs.forEach(element => {
+            docsAray.push(element.data())
+        });
+        callback(null,docsAray)
     
     })
 }
