@@ -313,7 +313,7 @@ userModel.getAllVideosVimeo =(callback)=>{
 }
 
 userModel.goLive = (params,callback)=>{
-    console.log(params.body.channel)
+    console.log(params.channel)
 //     const db = cvivoMain.firestore();
 //     var _data = {Idvivo:params.ID_video,Vivo:params.isOnLive,chatEvent:params.topic}
 //     var dbref1 = db.collection("Config").doc(params.channel);
