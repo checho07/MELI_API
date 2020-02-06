@@ -7,6 +7,7 @@ var cvivoAdminKey = require("../../cvivo-admin-2020-Key.json")
 let userModel = {};
 var cvivoMain;
 var cvivoAdmin;
+var tempDocId;
 const nodemailer = require("nodemailer");
 require('dotenv').config();
 
@@ -312,15 +313,51 @@ userModel.getAllVideosVimeo =(callback)=>{
     })
 }
 
-userModel.goLive = (params,callback)=>{
-    // console.log(params.channel)
-    const db = cvivoMain.firestore();
-    var _data = {Idvivo:params.ID_video,Vivo:params.isOnLive,chatEvent:params.topic}
-    var dbref1 = db.collection("Config").doc(params.channel);
+userModel.goLive = (params,callback)=>{ 
     
-   dbref1.update(_data).then(()=>{
-    callback(null,"En vivo");
-   })
+        let videoIdByChannel;
+        switch (params.channel) {
+            case 'Diseña':
+                videoIdByChannel = '367337559'
+                break;
+                case 'Emprende':
+                videoIdByChannel = '322243688'
+                break;
+                case 'Gerencia':
+                videoIdByChannel = '386316992'
+                break;
+                case 'Produce':
+                videoIdByChannel = '385555523'
+                break;
+        
+            default:
+                break;
+        }
+        
+        var _dataOn = {Idvivo:params.ID_video,Vivo:true,chatEvent:params.topic}
+        var _dataOff = {Idvivo:videoIdByChannel,Vivo:false,chatEvent:''}
+        var mainDbRef = cvivoMain.firestore().collection("Config").doc(params.channel);
+        let adminCollectionRef = cvivoAdmin.firestore().collection('parrilla').where('ID_video',"==",params.ID_video) 
+        
+        if(params.isOnLive){
+
+            mainDbRef.update(_dataOff).then(()=>{
+                adminCollectionRef.stream().on('data',(documentSnapshot)=>{            
+                    cvivoAdmin.firestore().collection('parrilla').doc(documentSnapshot.id)
+                    .update({isOnLive:false,active:false}).then(()=> {callback(null,'En vivo finalizó')})
+                })
+        
+        })
+        }else{
+            mainDbRef.update(_dataOn).then(()=>{
+                adminCollectionRef.stream().on('data',(documentSnapshot)=>{            
+                    cvivoAdmin.firestore().collection('parrilla').doc(documentSnapshot.id)
+                    .update({isOnLive:true}).then(()=> {callback(null,'En vivo')})
+                })
+        
+        })
+        }
+       
   
 
 }  
