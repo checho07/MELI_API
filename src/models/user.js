@@ -313,7 +313,7 @@ userModel.getAllVideosVimeo =(callback)=>{
     })
 }
 userModel.postEvent = (params , callback)=>{
-    params.date = new Date(params.date)/1000
+    params.date = new Date(params.date)
     let event = {active:true,isOnLive:false,...params}
     cvivoAdmin.firestore().collection("parrilla").add(event).then(()=> callback(null,'Evento creado'))
 }
