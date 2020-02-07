@@ -312,6 +312,11 @@ userModel.getAllVideosVimeo =(callback)=>{
     
     })
 }
+userModel.postEvent = (params , callback)=>{
+    params.date = new Date(params.date)/1000
+    let event = {active:true,isOnLive:false,...params}
+    console.log(event)
+}
 
 userModel.goLive = (params,callback)=>{ 
     
