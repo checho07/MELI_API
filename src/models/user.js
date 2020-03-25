@@ -329,7 +329,7 @@ userModel.goLive = (params,callback)=>{
                 videoIdByChannel = '322243688'
                 break;
                 case 'Gerencia':
-                videoIdByChannel = '386316992'
+                videoIdByChannel = '390830037'
                 break;
                 case 'Produce':
                 videoIdByChannel = '385555523'
