@@ -341,15 +341,15 @@ userModel.goLive = (params,callback)=>{
             default:
                 break;
         }
-        
-        var _dataOn = {Idvivo:params.ID_video,Vivo:false,chatEvent:params.topic}
         var chat;
         if(params.channel == 'Conectate'){
             chat = true;
         }else{
             chat = false;
         }
-        var _dataOff = {Idvivo:videoIdByChannel,Vivo:chat,chatEvent:''}
+        var _dataOn = {Idvivo:params.ID_video,Vivo:chat,chatEvent:params.topic}
+       
+        var _dataOff = {Idvivo:videoIdByChannel,Vivo:false,chatEvent:''}
         var mainDbRef = cvivoMain.firestore().collection("Config").doc(params.channel);
         let adminCollectionRef = cvivoAdmin.firestore().collection('parrilla').where('ID_video',"==",params.ID_video) 
         
