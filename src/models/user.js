@@ -307,6 +307,21 @@ userModel.getchatList = (callback) => {
     })
 }
 
+userModel.getCvivoChatLog = (params , callback)=>{    
+    const db =  cvivoMain.firestore().collection("chats").doc(params.doc).get().then(res=>{
+       
+        let docsAray = []
+        res.docs.forEach(element => {
+            if(element.data()){
+                docsAray.push(element.data())
+            }
+          
+        });
+        callback(null,docsAray)
+    
+    })
+}
+
 
  userModel.getActiveSchedule = (callback)=>{
     const db = cvivoAdmin.firestore();
