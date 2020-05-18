@@ -308,7 +308,7 @@ userModel.getchatList = (callback) => {
 }
 
 userModel.getCvivoChatLog = (params , callback)=>{    
-    const db =  cvivoMain.firestore().collection("chats").doc(params.doc).collection(chatLog).get().then(res=>{
+    const db =  cvivoMain.firestore().collection("chats").doc(params).collection(chatLog).get().then(res=>{
        
         let docsAray = []
         res.docs.forEach(element => {

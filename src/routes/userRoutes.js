@@ -148,11 +148,11 @@ module.exports = function (app){
             })
          })
 
-         app.patch('/admin/chat/log',(req,res)=>{
+         app.get('/admin/chat/:doc',(req,res)=>{
             res.header = 'Access-Control-Allow-Origin', '*'
             res.header ='Access-Control-Allow-Credentials', true
             res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'
-            var _config = req.body;
+            var _config = req.params.doc;
             User.getCvivoChatLog(_config,(err,data)=>{
                 res.status(200).json(data)
             })
