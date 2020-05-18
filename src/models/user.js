@@ -290,6 +290,24 @@ userModel.getAllVideosVimeo =(callback)=>{
  }
 
  /////////////////  CVIVO ADMIN ////////////
+
+
+userModel.getchatList = (callback) => {
+    const db =  cvivoMain.firestore().collection("chats").get().then(res=>{
+       
+        let docsAray = []
+        res.docs.forEach(element => {
+            if(element.data()){
+                docsAray.push(element.data())
+            }
+          
+        });
+        callback(null,docsAray)
+    
+    })
+}
+
+
  userModel.getActiveSchedule = (callback)=>{
     const db = cvivoAdmin.firestore();
     //  db.collection('parrilla').orderBy('date',"asc").onSnapshot(doc=>{

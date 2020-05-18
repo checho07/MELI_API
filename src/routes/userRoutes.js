@@ -139,6 +139,15 @@ module.exports = function (app){
 
         // CVIVO ADMIN ////
 
+        app.get('/admin/chat/list',(req,res)=>{
+            res.header = 'Access-Control-Allow-Origin', '*'
+            res.header ='Access-Control-Allow-Credentials', true
+            res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'  
+            User.getchatList((err,data)=>{
+                res.status(200).json(data)
+            })
+         })
+
      app.get('/admin/schedule/active',(req,res)=>{
         res.header = 'Access-Control-Allow-Origin', '*'
         res.header ='Access-Control-Allow-Credentials', true
