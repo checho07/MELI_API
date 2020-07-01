@@ -394,6 +394,9 @@ userModel.goLive = (params,callback)=>{
                 case 'Conectate':
                 videoIdByChannel = '322243688'
                 break;
+                case 'Desconectados':
+                videoIdByChannel = '434517038'
+                break;
         
             default:
                 break;
