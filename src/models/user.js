@@ -235,6 +235,30 @@ userModel.getVideos =(callback)=>{
         }
         )
  }
+ userModel.getVideosPortadas =(callback)=>{    
+
+    client.request(
+        {
+            method:'GET',
+            path: '/me/projects/1071209/videos',
+            query:{
+                page:1,
+                per_page:100,
+                fields:'uri,files,name,description,pictures.sizes'
+            },
+            headers:{"Access-Control-Allow-Origin":"*"}
+           
+          
+        },function(error, body, status_code, headers){
+            if(error){
+                console.log('ERROR'+error)
+            };
+            callback(null,body.data)
+            console.log(body)
+        }
+        )
+ }
+ 
 
 
 userModel.getAllVideosVimeo =(callback)=>{    
