@@ -437,6 +437,7 @@ userModel.goLive = (params,callback)=>{
 }  
 
 userModel.payu = (params,callback)=>{ 
+    console.log(params)
     cvivoMain.firestore().collection("payu").add(params).then(()=> {callback(null,'En vivo')})
 }
    
