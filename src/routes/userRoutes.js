@@ -200,6 +200,16 @@ module.exports = function (app){
         })
      })
 
+     app.post('/payu',(req,res)=>{
+        res.header = 'Access-Control-Allow-Origin', '*'
+        res.header ='Access-Control-Allow-Credentials', true
+        res.header ='Access-Control-Allow-Methods', 'PATCH,POST, GET, PUT, DELETE, OPTIONS'
+        var _event = req.params;
+        User.payu(_event,(err,data)=>{
+            res.status(200).json(data)
+        })
+     })
+
 
      
 }
