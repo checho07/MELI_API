@@ -56,7 +56,7 @@ userModel.getAllVideosVimeo =(callback)=>{
 
  userModel.getVideosFromAlbum =(params, callback)=>{
 
-
+    console.log("paramsUser:"+params)
     client.request(
         {
             method:'GET',
