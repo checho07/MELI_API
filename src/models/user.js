@@ -72,7 +72,7 @@ userModel.getAllVideosVimeo =(callback)=>{
                 console.log('ERROR'+error)
             };
             callback(null,body.data)
-            console.log(body)
+            // console.log(body)
         }
         )
  } 
