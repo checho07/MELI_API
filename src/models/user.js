@@ -12,7 +12,7 @@ userModel.getAllVideosVimeo =(callback)=>{
     client.request(
         {
             method:'GET',
-            path: '/users/49564935/videos',
+            path: '/me/videos',
             query:{
                 page:1,
                 per_page:100,
