@@ -1,7 +1,7 @@
 let Vimeo = require('vimeo').Vimeo;
 var admin = require('firebase-admin');
 let userModel = {};
-let client = new Vimeo('29f16279edeff6b5cce56553bdde6bfde3fa5bae','c7tbCj5B4Vm9jKu0mnfFGAN65Ii8mTqJashZhwVdXotEFYzMn1bJWGxI3sVCYnuuzedGyFWulb+uaE1f/kTZvtoKbqfz6148+XjRJl/8vlmowKjoL2tnd4bAsI7h1ZOd','0d3bc625c629371b8b82f454a488de3c');
+let client = new Vimeo('29f16279edeff6b5cce56553bdde6bfde3fa5bae','c7tbCj5B4Vm9jKu0mnfFGAN65Ii8mTqJashZhwVdXotEFYzMn1bJWGxI3sVCYnuuzedGyFWulb+uaE1f/kTZvtoKbqfz6148+XjRJl/8vlmowKjoL2tnd4bAsI7h1ZOd','c40b58135194a632e482b22e2461d1ee');
 require('dotenv').config();
 
 
