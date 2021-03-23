@@ -67,7 +67,7 @@ userModel.getAllVideosVimeo =(callback)=>{
             query:{
                 fields:'name,uri,description,duration,files',
                 direction:'asc',
-                sort:'alphabetical'
+                sort:'manual'
             },
             headers:{"Access-Control-Allow-Origin":"*"}
            
