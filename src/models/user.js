@@ -65,7 +65,9 @@ userModel.getAllVideosVimeo =(callback)=>{
             method:'GET',
             path: `/me/albums/${params}/videos`,
             query:{
-                fields:'name,metadata.connections.videos.uri'
+                fields:'name,uri,description,duration,files',
+                direction:'asc',
+                sort:'alphabetical'
             },
             headers:{"Access-Control-Allow-Origin":"*"}
            
