@@ -104,6 +104,11 @@ userModel.getAllVideosVimeo =(callback)=>{
         )
  }
 
+ userModel.getMoodleUrl = (callback)=> {
+     const url = {url:'http.cun.com.co'}
+     callback(null, url);
+ }
+
 
 
  module.exports = userModel;
