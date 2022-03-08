@@ -105,7 +105,7 @@ userModel.getAllVideosVimeo =(callback)=>{
  }
 
  userModel.getMoodleUrl = (callback)=> {
-     const url = {url:'https://campusdigital.cun.edu.co/digital'}
+     const url = {url:'http://efi.cun.edu.co/efi'}
      callback(null, url);
  }
 
