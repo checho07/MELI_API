@@ -1,7 +1,7 @@
 {
-  "name": "api_vimeo",
+  "name": "api_telecampus",
   "version": "1.0.0",
-  "description": "Esta es la API de vimeo para conectar con el perfil CUNBRE",
+  "description": "Esta es la API de conexion a firebase DB para Telecampus-moodle",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
     "morgan": "*",
     "multer": "^1.4.2",
     "nodemailer": "^6.4.2",
-    "nodemon": "*",
+    "nodemon": "^2.0.15",
     "vimeo": "*"
   },
   "engines": {
