@@ -17,6 +17,7 @@ initializeApp();
    
   try {
     collectionRef = telecampusFirebase.firestore().collection('telecampusMoodle').doc('urlConfig');
+    
     collectionRef.get().then((res)=> {
         var url = res.data().url;
         console.log(url)
